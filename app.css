@@ -1,0 +1,55 @@
+.tile {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    box-sizing: border-box;
+  }
+  
+  
+  .tile:hover {
+    background-color: lightgray;
+  }
+  
+  .tile.marked {
+    cursor: not-allowed;
+    background-color: lightblue;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tile-x, .tile-o {
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #message {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .winner-message, .tie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: green;
+    height: 100px;
+  }
+  
+  .sparkle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation: sparkle 1s linear forwards;
+    background-color: rgb(234, 255, 0);
+  }
+  
