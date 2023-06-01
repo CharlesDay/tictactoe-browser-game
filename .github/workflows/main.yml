@@ -45,13 +45,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@v3
-        with:
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - run: yarn install
+      - run: ls node_modules
 
   Explore-GitHub-Actions-Dev:
     runs-on: ubuntu-latest
