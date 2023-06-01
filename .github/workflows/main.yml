@@ -42,7 +42,6 @@ jobs:
     needs: [build_and_test]
     steps:
       - uses: actions/checkout@v3
-      - run: ls
       - uses: actions/cache@v3
         with:
           path: |
@@ -51,10 +50,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - run: ls node_modules
       - run: yarn install --frozen-lockfile
-      - name: Install curl
-        run: sudo apt-get install -y curl
       - name: Cleanup
         run: |
           gh extension install actions/gh-actions-cache
