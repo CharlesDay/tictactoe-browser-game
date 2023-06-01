@@ -42,11 +42,6 @@ jobs:
     needs: [build_and_test]
     steps:
       - uses: actions/checkout@v3
-      # Setup .npmrc file to publish to npm
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
       - run: ls
       - uses: actions/cache@v3
         with:
@@ -83,15 +78,3 @@ jobs:
           echo "Donezo"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - run: ./clean-caches.sh
-      #   env:
-      #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-  # Explore-GitHub-Actions-Dev:
-  #   runs-on: ubuntu-latest
-  #   environment: dev
-  #   steps:
-  #     - name: Check out repository code
-  #       uses: actions/checkout@v3
-  #     - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-  #     - run: echo "${{ vars.TEST }} environment"
