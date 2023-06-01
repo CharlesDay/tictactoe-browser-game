@@ -60,9 +60,31 @@ jobs:
       - run: yarn install --frozen-lockfile
       - name: Install curl
         run: sudo apt-get install -y curl
-      - run: ./clean-caches.sh
+      - name: Cleanup
+        run: |
+          gh extension install actions/gh-actions-cache
+
+          REPO=${{ github.repository }}
+          BRANCH="main"
+
+          echo "Fetching list of cache key"
+          cacheKeysForPR=$(gh actions-cache list -R $REPO -B $BRANCH | cut -f 1 )
+
+          echo "$cacheKeysForPR"
+
+          # ## Setting this to not fail the workflow while deleting cache keys. 
+          # set +e
+          # echo "Deleting caches..."
+          # for cacheKey in $cacheKeysForPR
+          # do
+          #     gh actions-cache delete $cacheKey -R $REPO -B $BRANCH --confirm
+          # done
+          echo "Done"
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - run: ./clean-caches.sh
+      #   env:
+      #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   # Explore-GitHub-Actions-Dev:
   #   runs-on: ubuntu-latest
