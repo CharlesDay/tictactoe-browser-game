@@ -61,6 +61,8 @@ jobs:
       - name: Install curl
         run: sudo apt-get install -y curl
       - run: ./clean-caches.sh
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   # Explore-GitHub-Actions-Dev:
   #   runs-on: ubuntu-latest
