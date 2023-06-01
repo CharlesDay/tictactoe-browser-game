@@ -80,7 +80,7 @@ jobs:
           do
               gh actions-cache delete $cacheKey -R $REPO -B $BRANCH --confirm
           done
-          echo "Done"
+          echo "Donezo"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - run: ./clean-caches.sh
