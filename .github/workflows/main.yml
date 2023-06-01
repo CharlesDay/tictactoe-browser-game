@@ -5,6 +5,9 @@ on: [push]
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    outputs:
+      dir: ${{steps.yarn-cache-dir-path.outputs.dir}}
+      version: ${{steps.yarn-cache-dir-path.outputs.version}}
     steps:
       - uses: actions/checkout@v3
 
@@ -45,27 +48,21 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: |
-          echo "{dir}={$(yarn cache dir)}" >> $GITHUB_OUTPUT
-          echo "{version}={$(yarn -v)}" >> $GITHUB_OUTPUT
-
       - uses: actions/cache@v3
         with:
           path: |
             **/node_modules
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            ${{ needs.build_and_test.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: ls node_modules
 
-  Explore-GitHub-Actions-Dev:
-    runs-on: ubuntu-latest
-    environment: dev
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "${{ vars.TEST }} environment"
+  # Explore-GitHub-Actions-Dev:
+  #   runs-on: ubuntu-latest
+  #   environment: dev
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v3
+  #     - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+  #     - run: echo "${{ vars.TEST }} environment"
