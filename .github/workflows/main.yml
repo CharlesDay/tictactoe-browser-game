@@ -48,8 +48,7 @@ jobs:
       - run: yarn
       - run: echo "seeing if the nodeModules are what is expected"
       - run: ls
-      - run: cd node_modules
-      - run: ls
+      - run: ls node_modules
 
   Explore-GitHub-Actions-Dev:
     runs-on: ubuntu-latest
