@@ -46,7 +46,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn
-      - run: yarn build
       - run: echo "seeing if the nodeModules are what is expected"
       - run: ls
       - run: cd node_modules
