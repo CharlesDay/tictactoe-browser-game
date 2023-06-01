@@ -73,13 +73,13 @@ jobs:
           cachesToDelete=$(tail -n +2 <<< "$cacheKeysForPR")
           echo "$cachesToDelete"
 
-          # ## Setting this to not fail the workflow while deleting cache keys. 
-          # set +e
-          # echo "Deleting caches..."
-          # for cacheKey in $cacheKeysForPR
-          # do
-          #     gh actions-cache delete $cacheKey -R $REPO -B $BRANCH --confirm
-          # done
+          ## Setting this to not fail the workflow while deleting cache keys. 
+          set +e
+          echo "Deleting caches..."
+          for cacheKey in $cachesToDelete
+          do
+              gh actions-cache delete $cacheKey -R $REPO -B $BRANCH --confirm
+          done
           echo "Done"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
