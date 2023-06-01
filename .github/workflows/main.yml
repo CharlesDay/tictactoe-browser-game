@@ -47,7 +47,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn
       - run: echo "seeing if the nodeModules are what is expected"
-      - run: ls
       - run: ls node_modules
 
   Explore-GitHub-Actions-Dev:
