@@ -3,6 +3,32 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 
 jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get npm cache directory path
+        id: npm-cache-dir-path
+        run: |
+          echo "::set-output name=dir::$(npm cache dir)"
+          echo "::set-output name=version::$(npm -v)"
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ${{ steps.npm-cache-dir-path.outputs.dir }}
+            '**/node_modules'
+          key: ${{ runner.os }}-npm-${{ steps.npm-cache-dir-path.outputs.version }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install packages
+        run: npm ci
+
   Explore-GitHub-Actions-Dev:
     runs-on: ubuntu-latest
     environment: dev
@@ -14,10 +40,9 @@ jobs:
 
   Explore-GitHub-Actions-Test:
     runs-on: ubuntu-latest
-    # environment: test
+    environment: test
     steps:
       - name: Check out repository code
-        environment: test
         uses: actions/checkout@v3
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "${{ vars.TEST }} environment"
