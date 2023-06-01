@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/CharlesDay/tictactoe-browser-game#readme",
   "dependencies": {
+    "async": "^3.2.4",
     "axios": "^1.4.0"
   }
 }
