@@ -35,6 +35,22 @@ jobs:
       - name: Install packages again
         run: yarn install --frozen-lockfile
 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # Setup .npmrc file to publish to npm
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn
+      - run: yarn build
+      - run: echo "seeing if the nodeModules are what is expected"
+      - run: ls
+      - run: cd node_modules
+      - run: ls
+
   Explore-GitHub-Actions-Dev:
     runs-on: ubuntu-latest
     environment: dev
