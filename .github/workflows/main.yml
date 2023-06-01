@@ -1,6 +1,7 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
+
 jobs:
   Explore-GitHub-Actions-Dev:
     runs-on: ubuntu-latest
@@ -9,7 +10,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "This is the $TEST environment"
+      - run: echo "This is the ${{ env.TEST }} environment"
 
   Explore-GitHub-Actions-Test:
     runs-on: ubuntu-latest
@@ -18,4 +19,4 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "This is the $TEST environment"
+      - run: echo "This is the ${{ env.TEST }} environment"
