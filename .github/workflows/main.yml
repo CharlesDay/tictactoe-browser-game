@@ -70,7 +70,7 @@ jobs:
           echo "Fetching list of cache key"
           cacheKeysForPR=$(gh actions-cache list -R $REPO -B $BRANCH | cut -f 1 )
 
-          tail -n +2 <<< $$cacheKeysForPR
+          tail -n +2 <<< "$cacheKeysForPR"
           # cacheToKeep=${cacheKeysForPR[0]}
           echo "$cacheKeysForPR"
 
