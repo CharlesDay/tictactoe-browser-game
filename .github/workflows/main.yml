@@ -58,6 +58,11 @@ jobs:
             ${{ runner.os }}-yarn-
       - run: ls node_modules
       - run: yarn install --frozen-lockfile
+      - name: curl
+        uses: wei/curl@v1
+        with:
+          args: -X GET https://api.github.com/orgs/ORG/actions/cache/usage -H "Accept: application/vnd.githu+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" 
+
 
   # Explore-GitHub-Actions-Dev:
   #   runs-on: ubuntu-latest
